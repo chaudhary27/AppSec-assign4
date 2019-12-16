@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block header %}
+	<h1>{% block title %}Register{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.uname.label }}<br>
+            {{ form.uname(size=32) }}<br>
+            {% for error in form.uname.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.pword.label }}<br>
+            {{ form.pword(size=32) }}<br>
+            {% for error in form.pword.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.twoFA.label }}<br>
+            {{ form.twoFA(size=11) }}<br>
+            {% for error in form.twoFA.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+	<div id="success" style="display: none;">{{ regResult }}</div>
+{% endblock %}

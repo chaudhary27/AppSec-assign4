@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block header %}
+	<h1>{% block title %}
+	{% if current_user.is_anonymous %}
+    NYU AppSec
+    {% else %}
+    Hello, {{ current_user.uname }}!
+    {% endif %}
+	{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+	<p>This is a spellchecker flask web app.</p>
+	<p>In order to use the spellchecker <a href="{{ url_for('login') }}">login</a></p>
+	<p>Create an account <a href="{{ url_for('register') }}">register</a></p>
+
+{% endblock %}

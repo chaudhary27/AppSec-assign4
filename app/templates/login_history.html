@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>{% block title %}Login History{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <div>
+            {{ form.userid.label }}
+            {{ form.userid(size=32) }}
+            {% for error in form.userid.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            </div>
+        </fieldset>
+        <p>{{ form.submit() }}</p>
+        <div>
+            {% for event in allHistory %}
+                <fieldset>
+                    <p id=login{{event.id}}>Log Event: {{event.id}}</p>
+                    <p>User Name: {{ event.uname }}</p>
+                    <p id=login{{event.id}}_time>Login Event: {{event.login_time}}</p>
+                    <p id=logout{{event.id}}_time>Logout Event: {{event.logout_time if (event.logout_time) else 'N/A' }}</p>
+                </fieldset>
+            {% endfor %}
+        </div>
+    </form>
+{% endblock %}

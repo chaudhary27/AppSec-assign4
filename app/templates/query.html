@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>{% block title %}Query Detail{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <div>
+        {% for event in querydetail %}
+            <p id=queryid>Query ID: {{event.id}}</p>
+            <p id=username>Username: {{ event.uname }}</p>
+            <p id=querytext>Query Text: {{event.query_text}}</p>
+            <p id=queryresults>Query Results: {{event.query_results }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+  spellchecker:
+     image: assign4:latest
+     build: .
+     ports:
+         - "8080:5000"
+     deploy:
+        mode: replicated
+        replicas: 4
+        resources:
+            limits:
+              cpus: "0.50"
+              memory: 50M
+            reservations:
+              cpus: "0.25"
+              memory: 20M
+     environment:
+        SECRET_KEY: /run/secrets/app_secret_key
+        ADMIN_PASS: /run/secrets/admin_pass
+        ADMIN_2FA: /run/secrets/admin_2fa
+     secrets:
+         - app_secret_key
+         - admin_pass
+         - admin_2fa
+
+secrets:
+    app_secret_key:
+        external: true
+    admin_pass:
+        external: true
+    admin_2fa:
+        external: true

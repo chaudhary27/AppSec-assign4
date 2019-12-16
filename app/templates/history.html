@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>{% block title %}
+        {% if current_user.admin_role %}
+            Query History
+        {% else %}
+            Spell Queries for {{ user }}
+        {% endif %}
+    {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+
+        {% if current_user.admin_role %}
+            <fieldset>
+                <div>
+                {{ form.userquery.label }}
+                {{ form.userquery(size=32) }}
+                {% for error in form.userquery.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+                </div>
+            </fieldset>
+            <p>{{ form.submit() }}</p>
+        {% endif %}
+
+        <div>
+            <p id=numqueries>Total # of Queries:{{ count }} </p>
+            <div>
+                {% for event in allHistory %}
+                    <p id=query{{event.id}}>Query #:<a href="history/query{{event.id}}">{{event.id}}</a></p>
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+{% endblock %}
